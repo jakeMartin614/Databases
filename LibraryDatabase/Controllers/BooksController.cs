@@ -1,4 +1,4 @@
-﻿using LibraryDatabase;
+﻿using LibraryDatabase.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +10,18 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=librarydb;user=root;password=Sotamaw@2204;";
+        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
 
         [HttpGet]
-        public ActionResult<IEnumerable<Book>> GetBooks()
+        public ActionResult<IEnumerable<Book>> Get()
         {
             var books = new List<Book>();
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var query = "SELECT BookID, Title, Author FROM Books";
+                var query = 
+                    "SELECT book_id, book_name, author " +
+                    "FROM Books";
                 using (var command = new MySqlCommand(query, connection))
                 using (var reader = command.ExecuteReader())
                 {
@@ -27,9 +29,9 @@ namespace LibraryDatabase.Controllers
                     {
                         books.Add(new Book
                         {
-                            BookID = reader.GetInt32("BookID"),
-                            Title = reader.GetString("Title"),
-                            Author = reader.GetString("Author")
+                            BookID = reader.GetInt32("book_id"),
+                            Title = reader.GetString("book_name"),
+                            Author = reader.GetString("author")
                         });
                     }
                 }

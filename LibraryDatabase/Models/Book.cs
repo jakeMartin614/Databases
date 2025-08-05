@@ -1,4 +1,4 @@
-﻿namespace LibraryDatabase
+﻿namespace LibraryDatabase.Models
 {
     public class Book
     {
