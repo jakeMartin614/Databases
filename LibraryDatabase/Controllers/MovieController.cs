@@ -20,7 +20,7 @@ namespace LibraryDatabase.Controllers
             {
                 connection.Open();
                 var query =
-                    "SELECT movie_id, title, director, durration, release_date, genre FROM Movies";
+                    "SELECT movie_id, title, director, duration, release_date, genre FROM Movies";
                 using (var command = new MySqlCommand(query, connection))
                 using (var reader = command.ExecuteReader())
                 {
@@ -31,7 +31,7 @@ namespace LibraryDatabase.Controllers
                             movie_id = reader.GetInt32("movie_id"),
                             title = reader.GetString("name"),
                             director = reader.GetString("director"),
-                            durration = reader.GetString("durration"),
+                            duration = reader.GetString("duration"),
                             release_date = reader.GetDateTime("release_date"),
                             genre = reader.GetString("genre")
                         });

@@ -6,7 +6,7 @@ namespace LibraryDatabase.Models
         public string title { get; set; }
 
         public string director { get; set; }
-        public string durration { get; set; }
+        public string duration { get; set; }
         public DateTime release_date { get; set; }
         public string genre { get; set; }
 
