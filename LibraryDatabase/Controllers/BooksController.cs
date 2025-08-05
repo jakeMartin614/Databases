@@ -20,8 +20,7 @@ namespace LibraryDatabase.Controllers
             {
                 connection.Open();
                 var query = 
-                    "SELECT book_id, book_name, author " +
-                    "FROM Books";
+                    "SELECT book_id, book_name, author, isbn FROM Books";
                 using (var command = new MySqlCommand(query, connection))
                 using (var reader = command.ExecuteReader())
                 {
@@ -31,6 +30,7 @@ namespace LibraryDatabase.Controllers
                         {
                             BookID = reader.GetInt32("book_id"),
                             Title = reader.GetString("book_name"),
+                            ISBN = reader.GetString("isbn"),
                             Author = reader.GetString("author")
                         });
                     }
