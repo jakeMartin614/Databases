@@ -29,7 +29,7 @@ namespace LibraryDatabase.Controllers
                         movies.Add(new Movie
                         {
                             movie_id = reader.GetInt32("movie_id"),
-                            title = reader.GetString("name"),
+                            title = reader.GetString("title"),
                             director = reader.GetString("director"),
                             duration = reader.GetString("duration"),
                             release_date = reader.GetDateTime("release_date"),
