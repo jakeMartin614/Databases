@@ -1,6 +1,8 @@
 namespace LibraryDatabase.Models {
     public class Member { 
         public int ID { get; set; }
+
+        public int LibraryCard {  get; set; }
         public string Name { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
