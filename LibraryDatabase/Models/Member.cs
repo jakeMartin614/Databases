@@ -11,5 +11,8 @@ namespace LibraryDatabase.Models {
         public string City { get; set; }
         public string State { get; set; }
         public string ZIP { get; set; }
+
+        // Navigation property
+        public virtual ICollection<BorrowedMovies> BorrowedMovies { get; set; }
     }
 }
