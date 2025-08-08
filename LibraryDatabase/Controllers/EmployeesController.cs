@@ -10,13 +10,18 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
+        private readonly MySqlConnection _connection;
+
+        public EmployeesController(MySqlConnection connection)
+        {
+            this._connection = connection;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Employee>> Get()
         {
             var employees = new List<Employee>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
                 connection.Open();
                 var query =

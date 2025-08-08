@@ -11,12 +11,17 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class MembersController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
+        private readonly MySqlConnection _connection;
+
+        public MembersController(MySqlConnection connection)
+        {
+            this._connection = connection;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Member>> Get() {
             var members = new List<Member>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
 
                 connection.Open();
@@ -47,7 +52,7 @@ namespace LibraryDatabase.Controllers
         [HttpGet("MemberLibraryCard")]
         public ActionResult<IEnumerable<Member>> GetMemberLibraryCard() {
             var members = new List<Member>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
 
                 connection.Open();

@@ -10,13 +10,18 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
+        private readonly MySqlConnection _connection;
+
+        public BooksController(MySqlConnection connection)
+        {
+            this._connection = connection;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Book>> Get()
         {
             var books = new List<Book>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
                 connection.Open();
                 var query = 
@@ -44,7 +49,7 @@ namespace LibraryDatabase.Controllers
         {
             try
             {
-                using var connection = new MySqlConnection(connectionString);
+                using var connection = _connection;
                 connection.Open();
 
                 using var command = new MySqlCommand("SELECT 1", connection);

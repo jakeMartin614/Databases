@@ -9,14 +9,19 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class BorrowedMoviesController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
+        private readonly MySqlConnection _connection;
+
+        public BorrowedMoviesController(MySqlConnection connection)
+        {
+            this._connection = connection;
+        }
 
         // GET: api/BorrowedMovies
         [HttpGet]
         public ActionResult<IEnumerable<BorrowedMovies>> Get()
         {
             var borrowedMovies = new List<BorrowedMovies>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
                 connection.Open();
                 var query = @"

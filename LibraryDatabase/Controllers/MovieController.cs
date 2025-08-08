@@ -10,13 +10,18 @@ namespace LibraryDatabase.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly string connectionString = "server=localhost;database=Database_project_library;user=root;password=dblibrarysql;";
+        private readonly MySqlConnection _connection;
+
+        public MovieController(MySqlConnection connection)
+        {
+            this._connection = connection;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Movie>> Get()
         {
             var movies = new List<Movie>();
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = _connection)
             {
                 connection.Open();
                 var query =
