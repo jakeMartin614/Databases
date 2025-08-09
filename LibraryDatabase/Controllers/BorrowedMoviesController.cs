@@ -44,6 +44,8 @@ namespace LibraryDatabase.Controllers
                             borrowedMoviesID = reader.GetInt32("borrowed_movies_id"),
                             MemberID = reader.GetInt32("member_id"),
                             MovieID = reader.GetInt32("movie_id"),
+                            Title = reader.GetString("movie_title"),
+                            MemberName = reader.GetString("member_name"),
                             dueDate = reader.GetDateTime("due_date"),
                             returnDate = reader.IsDBNull(reader.GetOrdinal("return_date")) ? null : reader.GetDateTime("return_date")
                         });

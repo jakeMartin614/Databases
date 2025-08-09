@@ -9,8 +9,6 @@ namespace LibraryDatabase.Models
         public string duration { get; set; }
         public DateTime release_date { get; set; }
         public string genre { get; set; }
-
-        // Navigation property
-        public virtual ICollection<BorrowedMovie> BorrowedMovies { get; set; }
+        
     }
 }
