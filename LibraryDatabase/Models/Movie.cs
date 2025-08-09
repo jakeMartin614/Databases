@@ -11,6 +11,6 @@ namespace LibraryDatabase.Models
         public string genre { get; set; }
 
         // Navigation property
-        public virtual ICollection<BorrowedMovies> BorrowedMovies { get; set; }
+        public virtual ICollection<BorrowedMovie> BorrowedMovies { get; set; }
     }
 }

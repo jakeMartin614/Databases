@@ -1,6 +1,6 @@
 namespace LibraryDatabase.Models
 {
-    public class BorrowedMovies
+    public class BorrowedMovie
     {
         public int borrowedMoviesID { get; set; }
         public DateTime dueDate { get; set; }

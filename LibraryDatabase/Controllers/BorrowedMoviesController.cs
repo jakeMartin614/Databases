@@ -18,30 +18,30 @@ namespace LibraryDatabase.Controllers
 
         // GET: api/BorrowedMovies
         [HttpGet]
-        public ActionResult<IEnumerable<BorrowedMovies>> Get()
+        public ActionResult<IEnumerable<BorrowedMovie>> Get()
         {
-            var borrowedMovies = new List<BorrowedMovies>();
+            var borrowedMovies = new List<BorrowedMovie>();
             using (var connection = _connection)
             {
                 connection.Open();
                 var query = @"
-                    SELECT b.borrowed_movie_id, 
+                    SELECT b.borrowed_movies_id, 
                            b.member_id, b.movie_id, 
                            b.due_date, 
                            b.return_date,
                            m.title as movie_title,
                            mem.name as member_name
-                    FROM BorrowedMovies b
-                    JOIN Movie m ON b.movie_id = m.movie_id
-                    JOIN Member mem ON b.member_id = mem.member_id";
+                    FROM borrowed_movies b
+                    JOIN Movies m ON b.movie_id = m.movie_id
+                    JOIN Members mem ON b.member_id = mem.member_id";
                 using (var command = new MySqlCommand(query, connection))
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        borrowedMovies.Add(new BorrowedMovies
+                        borrowedMovies.Add(new BorrowedMovie
                         {
-                            borrowedMoviesID = reader.GetInt32("borrowed_movie_id"),
+                            borrowedMoviesID = reader.GetInt32("borrowed_movies_id"),
                             MemberID = reader.GetInt32("member_id"),
                             MovieID = reader.GetInt32("movie_id"),
                             dueDate = reader.GetDateTime("due_date"),
